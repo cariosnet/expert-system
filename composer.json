@@ -1,0 +1,20 @@
+{
+    "name": "zlab/expert-system",
+    "description": "ES module For Laravel",
+    "type": "library",
+    "require": {
+        "php": "7.1"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "muhammadzulfa",
+            "email": "12muhammadzulfa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Zlab\\ExpertSystem\\": "src/"
+        }
+    }
+}

@@ -12,6 +12,7 @@
             "email": "12muhammadzulfa@gmail.com"
         }
     ],
+    "minimum-stability": "1.0",
     "autoload": {
         "psr-4": {
             "ExpertSystem\\": "src/"

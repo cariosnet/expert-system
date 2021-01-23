@@ -18,6 +18,7 @@ class ExpertSystemServiceProvider extends ServiceProvider
         $this->publishes([$path => config_path('expert-system.php')], 'config');
 
         $this->mergeConfigFrom($path,'expert-system');
+        $this->loadMigrationsFrom(__DIR__.'/../migrations');
 
     }
 

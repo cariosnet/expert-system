@@ -28,6 +28,14 @@ class Question
         $this->topic_id = $topicId;
     }
 
+    /**
+     * @param string $question
+     * @param int $orders
+     * @param string $answerType
+     * text | switch | radio | select | multiple | number | date
+     * @param string $additionalInfo
+     * @return $this
+     */
     public function make($question, $orders, $answerType, $additionalInfo = ""): self
     {
         $this->created_by = Auth::user()->id;
@@ -39,7 +47,16 @@ class Question
         return $this;
     }
 
-    public function modify($id, $question, $orders, $answerType, $additionalInfo = "")
+    /**
+     * @param $id
+     * @param string $question
+     * @param int $orders
+     * @param string $answerType
+     * text | switch | radio | select | multiple | number | date
+     * @param string $additionalInfo
+     * @return $this
+     */
+    public function modify($id, $question, $orders, $answerType, $additionalInfo = ""): self
     {
         $this->updated_by = Auth::user()->id;
         $this->id = $id;
@@ -48,8 +65,14 @@ class Question
         $this->orders = $orders;
         $this->answer_type = $answerType;
         $this->additional_info = $additionalInfo;
+        return $this;
     }
 
+    /**
+     * @param string $functionName
+     * fetchQuestion | checkResult
+     * @return $this
+     */
     public function processThisQuestion($functionName): self
     {
         $this->need_process = true;
@@ -57,7 +80,14 @@ class Question
         return $this;
     }
 
-    public function setDependentQuestion($questionId, $operator, $value)
+    /**
+     * @param $questionId
+     * @param string $operator
+     * = | != | < | > | <= | >=
+     * @param $value
+     * @return $this
+     */
+    public function setDependentQuestion($questionId, $operator, $value): self
     {
         $json = [
             "question" => $questionId,
@@ -67,13 +97,24 @@ class Question
             ]
         ];
         $this->parameter_need = json_encode($json);
+        return $this;
     }
 
-    public function setOption($jsonOption)
+    /**
+     * @param $jsonOption
+     * for select type question : [{id: "1", name: "option1"},{id: "2", name: "option2"}]
+     * for radio type question : {"yes": "Yes", "no": "No"}
+     * @return $this
+     */
+    public function setOption($jsonOption): self
     {
         $this->answer_choice = json_encode($jsonOption);
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function build()
     {
         if($this->id != null){

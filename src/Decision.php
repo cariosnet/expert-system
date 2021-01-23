@@ -21,43 +21,77 @@ class Decision
         $this->question = $question->id;
     }
 
-    public function when()
+    /**
+     * @return $this
+     */
+    public function when(): self
     {
         $this->index++;
         $this->decision_map[$this->index] = [];
         return $this;
     }
 
-    public function is($value)
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function is($value): self
     {
         $this->decision_map[$this->index]['option'] = "=";
         $this->decision_map[$this->index]['value'] = $value;
+        return $this;
     }
 
-    public function greaterThan($value)
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function greaterThan($value): self
     {
         $this->decision_map[$this->index]['option'] = ">";
         $this->decision_map[$this->index]['value'] = $value;
+        return $this;
     }
 
-    public function lowerThan($value)
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function lowerThan($value): self
     {
         $this->decision_map[$this->index]['option'] = "<";
         $this->decision_map[$this->index]['value'] = $value;
+        return $this;
     }
 
-    public function maximum($value)
+    /**
+     * @param $value
+     * @return $this
+     */
+    public function maximum($value): self
     {
         $this->decision_map[$this->index]['option'] = "<=";
         $this->decision_map[$this->index]['value'] = $value;
+        return $this;
     }
 
-    public function setResult($result, $keyIndex = null)
+    /**
+     * @param $result
+     * @param null $keyIndex
+     * default value of keyIndex is depend by the order of calling function "when()"
+     * @return $this
+     */
+    public function setResult($result, $keyIndex = null): self
     {
         $this->decision_map[$this->index]['key_level'] = $keyIndex == null ? $this->index + 1 : $keyIndex;
         $this->decision_map[$this->index]['key'] = $result;
+
+        return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function build()
     {
         $d = EsProceduralDecision::create([

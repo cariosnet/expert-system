@@ -1,14 +1,14 @@
 <?php
 
 
-namespace MZF\Danalib\Providers;
+namespace ExpertSystem\Providers;
 
 
 use Illuminate\Support\ServiceProvider;
-use Zlab\ExpertSystem\Decision;
-use Zlab\ExpertSystem\ExpertSystem;
-use Zlab\ExpertSystem\Question;
-use Zlab\ExpertSystem\Topic;
+use ExpertSystem\Decision;
+use ExpertSystem\ExpertSystem;
+use ExpertSystem\Question;
+use ExpertSystem\Topic;
 
 class ExpertSystemServiceProvider extends ServiceProvider
 {

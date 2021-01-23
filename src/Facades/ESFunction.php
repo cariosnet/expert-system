@@ -1,15 +1,16 @@
 <?php
 
 
-namespace Zlab\ExpertSystem\Facades;
+namespace ExpertSystem\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
+use ExpertSystem\ExpertSystem;
 
 class ESFunction extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \Zlab\ExpertSystem\ExpertSystem::class;
+        return ExpertSystem::class;
     }
 }

@@ -98,8 +98,8 @@ class Decision
             'question_id' => $this->question,
             'decision_for' => $this->decision_for,
             'decision_map' => json_encode($this->decision_map),
-            'created_by' => Auth::user()->id,
+            'created_by' => Auth::user() != null ? Auth::user()->id : -1,
         ]);
-        return EsProceduralDecision::find($d);
+        return $d;
     }
 }

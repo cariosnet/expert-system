@@ -5,6 +5,7 @@ namespace ExpertSystem;
 
 
 use ExpertSystem\Models\EsTopics;
+use Illuminate\Database\QueryException;
 
 class Topic
 {
@@ -40,19 +41,24 @@ class Topic
         return $this;
     }
 
-    public function build(): EsTopics
+    public function build()
     {
-        $insert = EsTopics::create([
-            'topic_name' => $this->topic_name,
-            'topic_slug' => $this->topic_slug,
-            'result_type' => $this->result_type,
-            'negative_result' => $this->negative_result,
-            'positive_result' => $this->positive_result,
-            'data_result' => $this->data_result,
-            'progressive_result' => $this->progressive_result,
-            'progressive_rule' => $this->progressive_rule,
-            'stop_when_negative' => $this->stop_when_negative,
-        ]);
-        return EsTopics::find($insert);
+        try {
+            $insert = EsTopics::create([
+                'topic_name' => $this->topic_name,
+                'topic_slug' => $this->topic_slug,
+                'result_type' => $this->result_type,
+                'negative_result' => $this->negative_result,
+                'positive_result' => $this->positive_result,
+                'data_result' => $this->data_result,
+                'progressive_result' => $this->progressive_result,
+                'progressive_rule' => $this->progressive_rule,
+                'stop_when_negative' => $this->stop_when_negative,
+            ]);
+            return $insert;
+        }catch (QueryException $e){
+            throw $e;
+        }
+
     }
 }

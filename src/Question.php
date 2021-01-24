@@ -4,6 +4,7 @@
 namespace ExpertSystem;
 
 
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use ExpertSystem\Models\EsMiningQuestion;
 
@@ -38,7 +39,7 @@ class Question
      */
     public function make($question, $orders, $answerType, $additionalInfo = ""): self
     {
-        $this->created_by = Auth::user()->id;
+        $this->created_by = Auth::user() != null ? Auth::user()->id : -1;
         $this->question = $question;
         $this->question_slug = str_replace(" ", "-", strtolower($question));
         $this->orders = $orders;
@@ -58,7 +59,7 @@ class Question
      */
     public function modify($id, $question, $orders, $answerType, $additionalInfo = ""): self
     {
-        $this->updated_by = Auth::user()->id;
+        $this->updated_by = Auth::user() != null ? Auth::user()->id : -1;
         $this->id = $id;
         $this->question = $question;
         $this->question_slug = str_replace(" ", "-", strtolower($question));
@@ -117,36 +118,42 @@ class Question
      */
     public function build()
     {
-        if($this->id != null){
-            $data = EsMiningQuestion::find($this->id)->update([
-                'topic_id' => $this->topic_id,
-                'question' => $this->question,
-                'question_slug' => $this->question_slug,
-                'parameter_need' => $this->parameter_need,
-                'answer_choice' => $this->answer_choice,
-                'need_process' => $this->need_process,
-                'which_process' => $this->which_process,
-                'answer_type' => $this->answer_type,
-                'created_by' => $this->created_by,
-                'updated_by' => $this->updated_by,
-                'additional_info' => $this->additional_info,
-                'orders' => $this->orders,
-            ]);
+        try {
+
+            if ($this->id != null) {
+                $data = EsMiningQuestion::find($this->id)->update([
+                    'topic_id' => $this->topic_id,
+                    'question' => $this->question,
+                    'question_slug' => $this->question_slug,
+                    'parameter_need' => $this->parameter_need,
+                    'answer_choice' => $this->answer_choice,
+                    'need_process' => $this->need_process,
+                    'which_process' => $this->which_process,
+                    'answer_type' => $this->answer_type,
+                    'created_by' => $this->created_by,
+                    'updated_by' => $this->updated_by,
+                    'additional_info' => $this->additional_info,
+                    'orders' => $this->orders,
+                ]);
+            } else {
+                $data = EsMiningQuestion::create([
+                    'topic_id' => $this->topic_id,
+                    'question' => $this->question,
+                    'question_slug' => $this->question_slug,
+                    'parameter_need' => $this->parameter_need,
+                    'answer_choice' => $this->answer_choice,
+                    'need_process' => $this->need_process,
+                    'which_process' => $this->which_process,
+                    'answer_type' => $this->answer_type,
+                    'created_by' => $this->created_by,
+                    'updated_by' => $this->updated_by,
+                    'additional_info' => $this->additional_info,
+                    'orders' => $this->orders,
+                ]);
+            }
+            return $data;
+        }catch (QueryException $e){
+            throw  $e;
         }
-        $data = EsMiningQuestion::create([
-            'topic_id' => $this->topic_id,
-            'question' => $this->question,
-            'question_slug' => $this->question_slug,
-            'parameter_need' => $this->parameter_need,
-            'answer_choice' => $this->answer_choice,
-            'need_process' => $this->need_process,
-            'which_process' => $this->which_process,
-            'answer_type' => $this->answer_type,
-            'created_by' => $this->created_by,
-            'updated_by' => $this->updated_by,
-            'additional_info' => $this->additional_info,
-            'orders' => $this->orders,
-        ]);
-        return EsMiningQuestion::find($data);
     }
 }

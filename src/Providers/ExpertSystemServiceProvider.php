@@ -35,13 +35,13 @@ class ExpertSystemServiceProvider extends ServiceProvider
 
     public function registerAliases(){
         $this->app->alias('zlab.expert-system', ExpertSystem::class);
-        $this->app->alias('zlab.expert-system.question', Question::class);
-        $this->app->alias('zlab.expert-system.decision', Decision::class);
-        $this->app->alias('zlab.expert-system.topic', Topic::class);
+//        $this->app->alias('zlab.expert-system.question', Question::class);
+//        $this->app->alias('zlab.expert-system.decision', Decision::class);
+//        $this->app->alias('zlab.expert-system.topic', Topic::class);
     }
 
     public function registerEs(){
-        $this->app->singleton('mzf.danalib',function ($app){
+        $this->app->singleton('zlab.expert-system',function ($app){
             return new ExpertSystem(
                 $this->config('MODEL_PATH')
             );
@@ -77,7 +77,7 @@ class ExpertSystemServiceProvider extends ServiceProvider
 
     protected function config($key, $default = null)
     {
-        return config("dana.$key", $default);
+        return config("expert-system.$key", $default);
     }
 
 //    private function registerDecision()

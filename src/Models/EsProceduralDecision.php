@@ -1,6 +1,6 @@
 <?php
 
-namespace Zlab\ExpertSystem\Models;
+namespace ExpertSystem\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

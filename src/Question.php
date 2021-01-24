@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Zlab\ExpertSystem;
+namespace ExpertSystem;
 
 
 use Illuminate\Support\Facades\Auth;
-use Zlab\ExpertSystem\Models\EsMiningQuestion;
+use ExpertSystem\Models\EsMiningQuestion;
 
 class Question
 {

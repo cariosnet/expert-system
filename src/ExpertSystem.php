@@ -1,8 +1,8 @@
 <?php
-namespace Zlab\ExpertSystem;
+namespace ExpertSystem;
 
 use Illuminate\Support\Facades\Log;
-use Zlab\ExpertSystem\Models\EsMiningQuestion;
+use ExpertSystem\Models\EsMiningQuestion;
 
 class ExpertSystem
 {

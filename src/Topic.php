@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Zlab\ExpertSystem;
+namespace ExpertSystem;
 
 
-use Zlab\ExpertSystem\Models\EsTopics;
+use ExpertSystem\Models\EsTopics;
 
 class Topic
 {

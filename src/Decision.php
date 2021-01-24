@@ -1,13 +1,13 @@
 <?php
 
 
-namespace Zlab\ExpertSystem;
+namespace ExpertSystem;
 
 
 use Illuminate\Support\Facades\Auth;
-use Zlab\ExpertSystem\Models\EsMiningQuestion;
-use Zlab\ExpertSystem\Models\EsProceduralDecision;
-use Zlab\ExpertSystem\Models\EsTopics;
+use ExpertSystem\Models\EsMiningQuestion;
+use ExpertSystem\Models\EsProceduralDecision;
+use ExpertSystem\Models\EsTopics;
 
 class Decision
 {

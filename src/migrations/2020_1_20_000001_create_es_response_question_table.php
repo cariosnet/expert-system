@@ -16,7 +16,7 @@ class CreateEsResponseQuestionTable extends Migration
         Schema::create('es_response_question', function (Blueprint $table) {
             $table->increments('id');
             $table->string('session');
-            $table->string('question_id');
+            $table->integer('question_id');
             $table->json('response');
             $table->boolean('finish_session');
         });

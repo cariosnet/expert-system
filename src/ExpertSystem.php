@@ -218,7 +218,9 @@ class ExpertSystem
                     unset($return['question']);
                     unset($return['title']);
                     unset($return['description']);
+                    session()->forget('sessionEs');
                 }elseif (count($return['question']) == 0 && !array_key_exists('result',$return)){
+                    session()->forget('sessionEs');
                     return $this->checkResult($session,$res);
                 }
                 return $return;

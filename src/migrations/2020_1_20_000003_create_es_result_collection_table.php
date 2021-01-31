@@ -15,7 +15,7 @@ class CreateEsResultCollectionTable extends Migration
     {
         Schema::create('es_result_collection', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('session');
+            $table->string('session');
             $table->text('result');
             $table->timestamps();
         });

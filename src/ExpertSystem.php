@@ -2,6 +2,7 @@
 namespace ExpertSystem;
 
 use ExpertSystem\Models\EsResponseQuestion;
+use ExpertSystem\Models\EsResult;
 use ExpertSystem\Models\EsTopics;
 use Illuminate\Support\Facades\Log;
 use ExpertSystem\Models\EsMiningQuestion;
@@ -218,10 +219,21 @@ class ExpertSystem
                     unset($return['question']);
                     unset($return['title']);
                     unset($return['description']);
+                    $resCol = EsResult::create([
+                        'session' => $session,
+                        'result' => $return['result']
+                    ]);
                     session()->forget('sessionEs');
+                    $return = array_merge($return,["result_id" => $resCol->id]);
                 }elseif (count($return['question']) == 0 && !array_key_exists('result',$return)){
                     session()->forget('sessionEs');
-                    return $this->checkResult($session,$res);
+                    $return = $this->checkResult($session,$res);
+                    $resCol = EsResult::create([
+                        'session' => $session,
+                        'result' => $return['result']
+                    ]);
+                    $return = array_merge($return,["result_id" => $resCol->id]);
+                    return $return;
                 }
                 return $return;
             }

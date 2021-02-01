@@ -234,6 +234,13 @@ class ExpertSystem
                     ]);
                     $return = array_merge($return,["result_id" => $resCol->id]);
                     return $return;
+                }elseif (count($return['question']) == 0 && array_key_exists('result',$return)){
+                    session()->forget('sessionEs');
+                    $resCol = EsResult::create([
+                        'session' => $session,
+                        'result' => $return['result']
+                    ]);
+                    $return = array_merge($return,["result_id" => $resCol->id]);
                 }
                 return $return;
             }
